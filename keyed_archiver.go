@@ -8,6 +8,7 @@ import (
 	"io"
 	"io/ioutil"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
@@ -528,6 +529,7 @@ func (a *Archiver) printObject(v interface{}) string {
 		return fmt.Sprintf("unknow : %v", pval)
 	}
 }
+
 func (a *Archiver) printDate(pval map[string]interface{}) string {
 	date := &archiverDate{}
 	if err := Dictionary(pval).Unmarshal(date); err != nil {
