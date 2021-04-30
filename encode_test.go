@@ -33,6 +33,9 @@ func TestEncode(t *testing.T) {
 				}
 				subtest(t, FormatNames[fmt], func(t *testing.T) {
 					encoded, err := Marshal(test.Value, fmt)
+					// Remove newline (style)
+					encoded = bytes.ReplaceAll(encoded, []byte("\n"), []byte(""))
+					doc = bytes.ReplaceAll(doc, []byte("\n"), []byte(""))
 
 					if err != nil {
 						t.Error(err)
@@ -80,7 +83,9 @@ func ExampleEncoder_Encode() {
 
 	// Output: <?xml version="1.0" encoding="UTF-8"?>
 	// <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-	// <plist version="1.0"><dict><key>CFBundleInfoDictionaryVersion</key><string>6.0</string><key>band-size</key><integer>8388608</integer><key>bundle-backingstore-version</key><integer>1</integer><key>diskimage-bundle-type</key><string>com.apple.diskimage.sparsebundle</string><key>size</key><integer>4398046511104</integer></dict></plist>
+	// <plist version="1.0">
+	// <dict><key>CFBundleInfoDictionaryVersion</key><string>6.0</string><key>band-size</key><integer>8388608</integer><key>bundle-backingstore-version</key><integer>1</integer><key>diskimage-bundle-type</key><string>com.apple.diskimage.sparsebundle</string><key>size</key><integer>4398046511104</integer></dict>
+	// </plist>
 }
 
 func ExampleMarshal_xml() {
@@ -108,18 +113,18 @@ func ExampleMarshal_xml() {
 	// Output: <?xml version="1.0" encoding="UTF-8"?>
 	// <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 	// <plist version="1.0">
-	// 	<dict>
-	// 		<key>CFBundleInfoDictionaryVersion</key>
-	// 		<string>6.0</string>
-	// 		<key>band-size</key>
-	// 		<integer>8388608</integer>
-	// 		<key>bundle-backingstore-version</key>
-	// 		<integer>1</integer>
-	// 		<key>diskimage-bundle-type</key>
-	// 		<string>com.apple.diskimage.sparsebundle</string>
-	// 		<key>size</key>
-	// 		<integer>4398046511104</integer>
-	// 	</dict>
+	// <dict>
+	// 	<key>CFBundleInfoDictionaryVersion</key>
+	// 	<string>6.0</string>
+	// 	<key>band-size</key>
+	// 	<integer>8388608</integer>
+	// 	<key>bundle-backingstore-version</key>
+	// 	<integer>1</integer>
+	// 	<key>diskimage-bundle-type</key>
+	// 	<string>com.apple.diskimage.sparsebundle</string>
+	// 	<key>size</key>
+	// 	<integer>4398046511104</integer>
+	// </dict>
 	// </plist>
 }
 
