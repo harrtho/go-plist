@@ -122,7 +122,7 @@ func (p *Encoder) marshal(val reflect.Value) cfValue {
 
 	// We got this far and still may have an invalid anything or nil ptr/interface
 	if !val.IsValid() || ((val.Kind() == reflect.Ptr || val.Kind() == reflect.Interface) && val.IsNil()) {
-		return &cfDictionary{}
+		return nil
 	}
 
 	typ := val.Type()

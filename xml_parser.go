@@ -86,8 +86,7 @@ func (p *xmlPlistParser) parseXMLElement(element xml.StartElement) cfValue {
 
 		s := string(charData)
 		if len(s) == 0 {
-			// panic(errors.New("invalid empty <integer/>"))
-			return &cfNumber{signed: false, value: uint64(0)}
+			panic(errors.New("invalid empty <integer/>"))
 		}
 
 		if s[0] == '-' {
