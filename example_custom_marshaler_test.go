@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 
-	"howett.net/plist"
+	"github.com/xDevThomas/go-plist"
 )
 
 type Base64String string
